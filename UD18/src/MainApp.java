@@ -9,14 +9,17 @@ import java.util.logging.Logger;
 public class MainApp {
 	
 	static Connection connection;
-	static final String USER_MYSQL = "";
-	static final String PASS_MYSQL = "";
-	static final String URL = "";
+	
+	static final String USER_MYSQL = "jdbc:mysql://192.168.1.38:3306";
+	static final String PASS_MYSQL = "remote";
+	static final String URL = "Bootcam_1";
+
+	//static final String URL_MYSQL = "jdbc:mysql://192.168.1.73:3306";
+	//static final String USER_MYSQL = "remote";
+	//static final String PASS_MYSQL = "PASSWORD";
 
 	public static void main(String[] args) {
-
-		connection(URL,USER_MYSQL,PASS_MYSQL);
-		
+		connection(URL,USER_MYSQL,PASS_MYSQL);	
 	}
 	
 	private static void createBD (String name) {
