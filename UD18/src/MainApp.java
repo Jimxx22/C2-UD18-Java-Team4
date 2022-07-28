@@ -9,10 +9,13 @@ import java.util.logging.Logger;
 public class MainApp {
 	
 	static Connection connection;
+	static final String USER_MYSQL = "";
+	static final String PASS_MYSQL = "";
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		connection("jdbc:mysql://192.168.1.42:3306",USER_MYSQL,PASS_MYSQL);
+		
 	}
 	
 	private static void createBD (String name) {
@@ -37,6 +40,7 @@ public class MainApp {
 			Statement statement = connection.createStatement();
 			statement.executeUpdate(queryCreateTable);
 			System.out.println("Table created succesfully");
+			closeConnection();			
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
 		}
@@ -66,6 +70,7 @@ public class MainApp {
 			java.sql.ResultSet resultSet;
 			resultSet = st.executeQuery(querySl);
 			
+			closeConnection();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -85,6 +90,7 @@ public class MainApp {
 			String query = "DELETE FROM " + table + " WHERE ID = " + id + ";";
 			Statement st = connection.createStatement();
 			st.executeQuery(query);
+			closeConnection();
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
 		} 
@@ -101,11 +107,23 @@ public class MainApp {
 			st.executeUpdate(insert);
 			
 			System.out.println("Datos almacenados correctamente");
+			closeConnection();
 			
 		} catch (SQLException e) {
 			System.out.println("Error al almacendar los datos");
 			System.out.println(e);
 		}
+	}
+	
+	public static void showDB () {
+		try {
+			String query = "SHOW DATABASES; " ;
+			Statement st = connection.createStatement();
+			st.executeQuery(query);
+			closeConnection();
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		} 
 	}
 	
 	
