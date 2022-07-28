@@ -63,7 +63,7 @@ public class MainApp {
 
 	public static void connection(String url, String user, String pass) {
 		
-		try {
+		try {		
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager.getConnection(url, user, pass);
 			System.out.println("Server Connected");
@@ -126,6 +126,7 @@ public class MainApp {
 	
 	public void deleteRecord(String table, String id) {
 		try {
+			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
 			String query = "DELETE FROM " + table + " WHERE ID = " + id + ";";
 			Statement st = connection.createStatement();
 			st.executeQuery(query);
@@ -138,6 +139,7 @@ public class MainApp {
 	public static void insertData(String db, String insert) {
 		
 		try {
+			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
 			String usedb="USE "+db+";";
 			Statement stdb=connection.createStatement();
 			stdb.executeUpdate(usedb);
@@ -156,6 +158,7 @@ public class MainApp {
 	
 	public static void showDB () {
 		try {
+			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
 			String query = "SHOW DATABASES; " ;
 			Statement st = connection.createStatement();
 			java.sql.ResultSet resultSet;
