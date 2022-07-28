@@ -55,6 +55,22 @@ public class MainApp {
 		}		
 	}
 	
+	public static void getValues (String db, String nameTable) {
+		try {
+			String queryDB = "USE " + db + ";";
+			Statement stdb = connection.createStatement();
+			stdb.executeUpdate(queryDB);
+			
+			String querySl = "SELECT * FROM " + nameTable + ";";
+			Statement st = connection.createStatement();
+			java.sql.ResultSet resultSet;
+			resultSet = st.executeQuery(querySl);
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
 	public static void closeConnection() {
 		try {
 			connection.close();
