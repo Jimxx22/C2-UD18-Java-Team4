@@ -63,4 +63,14 @@ public class MainApp {
 			System.out.println("Error al desconectar");
 		}
 	}
+	
+	public void deleteRecord(String table, String id) {
+		try {
+			String query = "DELETE FROM " + table + " WHERE ID = " + id + ";";
+			Statement st = connection.createStatement();
+			st.executeQuery(query);
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		}
+	}
 }
