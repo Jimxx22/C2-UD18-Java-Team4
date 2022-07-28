@@ -90,6 +90,9 @@ public class Metodos {
 					case "DOUBLE":
 						System.out.println(rsmd.getColumnName(i)+": "+resultSet.getDouble(i));
 						break;
+					case "CHAR":
+						System.out.println(rsmd.getColumnName(i)+": "+resultSet.getString(i));
+						break;
 					}
 					
 				}
