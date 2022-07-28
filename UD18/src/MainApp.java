@@ -9,10 +9,12 @@ import java.util.logging.Logger;
 public class MainApp {
 	
 	static Connection connection;
+	static final String url = "";
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
+		connection("jdbc:mysql://192.168.1.73:3306","remote","PASSWORD");
+		
 	}
 	
 	private static void createBD (String name) {
