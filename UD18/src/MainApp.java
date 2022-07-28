@@ -9,12 +9,13 @@ import java.util.logging.Logger;
 public class MainApp {
 	
 	static Connection connection;
-	static final String USER_MYSQL = "";
-	static final String PASS_MYSQL = "";
+	static final String USER_MYSQL = "remote";
+	static final String PASS_MYSQL = "P@ssword";
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		connection("jdbc:mysql://192.168.1.42:3306",USER_MYSQL,PASS_MYSQL);
+		showDB();
 		
 	}
 	
@@ -119,7 +120,14 @@ public class MainApp {
 		try {
 			String query = "SHOW DATABASES; " ;
 			Statement st = connection.createStatement();
-			st.executeQuery(query);
+			java.sql.ResultSet resultSet;
+			resultSet = st.executeQuery(query);
+			
+			System.out.println("Databases:");
+			while (resultSet.next()) {
+				System.out.println(resultSet.getString("Database"));
+			}
+			
 			closeConnection();
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
