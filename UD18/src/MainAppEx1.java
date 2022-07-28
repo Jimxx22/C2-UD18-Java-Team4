@@ -14,7 +14,9 @@ public class MainAppEx1 extends Metodos{
 		connection(Credentials.URL_MYSQL, Credentials.USER_MYSQL, Credentials.PASS_MYSQL);
 		String database = "ud1801";
 		createBD(database);
-		createTable(database, "fabricantes", "codigo int not null, nombre varchar(255), primary key(codigo)");
+		createTable(database, "fabricantes", "codigo int not null, "
+				+ "nombre varchar(255), "
+				+ "primary key(codigo)");
 		createTable(database, "articulos", "codigo int not null, "
 				+ "nombre varchar(255), "
 				+ "precio decimal(10,0) not null, "

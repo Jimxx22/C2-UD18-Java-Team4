@@ -123,7 +123,13 @@ public class Metodos {
 			Statement stSelect = connection.createStatement();
 			resultSet = stSelect.executeQuery(querySl);
 			
-			String query = "DELETE FROM " + table + " WHERE "+resultSet.getMetaData().getColumnName(1)+" = " + id + ";";
+			String query;
+			if (resultSet.getMetaData().getColumnTypeName(1) == "INT") {
+				query = "DELETE FROM " + table + " WHERE "+resultSet.getMetaData().getColumnName(1)+" = " + id + ";";
+			}else {
+				query = "DELETE FROM " + table + " WHERE "+resultSet.getMetaData().getColumnName(1)+" = '" + id + "';";
+			}
+			
 			Statement st = connection.createStatement();
 			st.executeUpdate(query);
 			closeConnection();
