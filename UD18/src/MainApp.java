@@ -11,32 +11,38 @@ public class MainApp {
 	
 	static Connection connection;
 	
-	static final String USER_MYSQL = "remote";
+	/*static final String USER_MYSQL = "remote";
 	static final String PASS_MYSQL = "Bootcam_1"; 
-	static final String URL_MYSQL = "jdbc:mysql://192.168.1.38:3306";
+	static final String URL_MYSQL = "jdbc:mysql://192.168.1.38:3306";*/
 
-	//static final String URL_MYSQL = "jdbc:mysql://192.168.1.73:3306";
-	//static final String USER_MYSQL = "remote";
-	//static final String PASS_MYSQL = "PASSWORD";
+	static final String URL_MYSQL = "jdbc:mysql://192.168.1.73:3306";
+	static final String USER_MYSQL = "remote";
+	static final String PASS_MYSQL = "PASSWORD";
 
 	public static void main(String[] args) {
 
-		connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
+		connection(Credentials.URL_MYSQL,Credentials.USER_MYSQL,Credentials.PASS_MYSQL);
 		showDB();
+		
+		String database = "ud1801";
+		String table = "Fabricantes";
+		String columns = "";
+		createDB (database);
+		createTable(database, table, "");
 		
 	}
 	
-	private static void createBD (String name) {
+	private static void createDB (String databaseName) {
 		try {
-			String queryDrop  = "DROP DATABASE IF EXISTS" + name + ";";
+			String queryDrop  = "DROP DATABASE IF EXISTS " + databaseName + ";";
 			Statement stDrop = connection.createStatement();
 			stDrop.executeUpdate(queryDrop);
 			
-			String query = "CREATE DATABASE " + name + ";";
+			String query = "CREATE DATABASE " + databaseName + ";";
 			Statement st = connection.createStatement();
 			st.executeUpdate(query);
 			closeConnection();
-			System.out.println("La base de datos " + name + " se ha creado correctamente");
+			System.out.println("La base de datos " + databaseName + " se ha creado correctamente");
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -44,6 +50,7 @@ public class MainApp {
 	
 	private static void createTable(String database, String table, String columns) {
 		try {
+			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
 			String queryUseDb = "USE "+database+";";
 			Statement statementDb = connection.createStatement();
 			statementDb.executeUpdate(queryUseDb);
@@ -73,6 +80,7 @@ public class MainApp {
 	
 	public static void getValues (String db, String nameTable) {
 		try {
+			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
 			String queryDB = "USE " + db + ";";
 			Statement stdb = connection.createStatement();
 			stdb.executeUpdate(queryDB);
@@ -121,6 +129,7 @@ public class MainApp {
 	
 	public void deleteRecord(String table, String id) {
 		try {
+			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
 			String query = "DELETE FROM " + table + " WHERE ID = " + id + ";";
 			Statement st = connection.createStatement();
 			st.executeQuery(query);
@@ -133,6 +142,7 @@ public class MainApp {
 	public static void insertData(String db, String insert) {
 		
 		try {
+			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
 			String usedb="USE "+db+";";
 			Statement stdb=connection.createStatement();
 			stdb.executeUpdate(usedb);
@@ -151,6 +161,7 @@ public class MainApp {
 	
 	public static void showDB () {
 		try {
+			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
 			String query = "SHOW DATABASES; " ;
 			Statement st = connection.createStatement();
 			java.sql.ResultSet resultSet;
