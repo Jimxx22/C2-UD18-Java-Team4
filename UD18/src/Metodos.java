@@ -12,13 +12,10 @@ import com.mysql.cj.MysqlConnection;
 public class Metodos {
 	
 	static Connection connection;
-	static final String URL_MYSQL = "jdbc:mysql://192.168.1.38:3306";
-	static final String USER_MYSQL = "remote";
-	static final String PASS_MYSQL = "Bootcam_1";
 	
-	private static void createBD (String name) {
+	public static void createBD (String name) {
 		try {
-			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
+			connection(Credentials.URL_MYSQL,Credentials.USER_MYSQL,Credentials.PASS_MYSQL);
 			String queryDrop  = "DROP DATABASE IF EXISTS " + name + ";";
 			Statement stDrop = connection.createStatement();
 			stDrop.executeUpdate(queryDrop);
@@ -32,10 +29,10 @@ public class Metodos {
 		}
 	}
 	
-	private static void createTable(String database, String table, String columns) {
+	public static void createTable(String database, String table, String columns) {
 		try {
 
-			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
+			connection(Credentials.URL_MYSQL,Credentials.USER_MYSQL,Credentials.PASS_MYSQL);
 			String queryUseDb = "USE "+database+";";
 			Statement statementDb = connection.createStatement();
 			statementDb.executeUpdate(queryUseDb);
@@ -65,7 +62,7 @@ public class Metodos {
 	
 	public static void getValues (String db, String nameTable) {
 		try {
-			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
+			connection(Credentials.URL_MYSQL,Credentials.USER_MYSQL,Credentials.PASS_MYSQL);
 			String queryDB = "USE " + db + ";";
 			Statement stdb = connection.createStatement();
 			stdb.executeUpdate(queryDB);
@@ -115,7 +112,7 @@ public class Metodos {
 	
 	public void deleteRecord(String table, String id) {
 		try {
-			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
+			connection(Credentials.URL_MYSQL,Credentials.USER_MYSQL,Credentials.PASS_MYSQL);
 			String query = "DELETE FROM " + table + " WHERE ID = " + id + ";";
 			Statement st = connection.createStatement();
 			st.executeQuery(query);
@@ -128,7 +125,7 @@ public class Metodos {
 	public static void insertData(String db, String insert) {
 		
 		try {
-			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
+			connection(Credentials.URL_MYSQL,Credentials.USER_MYSQL,Credentials.PASS_MYSQL);
 			String usedb="USE "+db+";";
 			Statement stdb=connection.createStatement();
 			stdb.executeUpdate(usedb);
@@ -147,7 +144,7 @@ public class Metodos {
 	
 	public static void showDB () {
 		try {
-			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
+			connection(Credentials.URL_MYSQL,Credentials.USER_MYSQL,Credentials.PASS_MYSQL);
 			String query = "SHOW DATABASES; " ;
 			Statement st = connection.createStatement();
 			java.sql.ResultSet resultSet;
