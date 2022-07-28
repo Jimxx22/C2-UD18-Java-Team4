@@ -30,6 +30,10 @@ public class MainAppEx7 {
 		Metodos.insertData(db, insertCientificos);
 		Metodos.insertData(db, insertAsignadosA);
 		
+		Metodos.getValues(db, proyecto);	
+		Metodos.getValues(db, cientificos);	
+		Metodos.getValues(db, asignadosA);	
+		
 	}
 
 }

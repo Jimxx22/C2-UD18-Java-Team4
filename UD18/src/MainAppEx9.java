@@ -36,6 +36,11 @@ public class MainAppEx9 {
 		Metodos.insertData(db, insertInvestigadores);
 		Metodos.insertData(db, insertReserva);
 
+		Metodos.getValues(db, facultad);	
+		Metodos.getValues(db, equipos);	
+		Metodos.getValues(db, investigadores);	
+		Metodos.getValues(db, reserva);	
+		
 	}
 
 }
