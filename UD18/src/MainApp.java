@@ -7,28 +7,30 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.mysql.cj.MysqlConnection;
+
 public class MainApp {
 	
 	static Connection connection;
-	
+	static final String URL_MYSQL = "jdbc:mysql://192.168.1.42:3306";
 	static final String USER_MYSQL = "remote";
-	static final String PASS_MYSQL = "Bootcam_1"; 
-	static final String URL_MYSQL = "jdbc:mysql://192.168.1.38:3306";
-
-	//static final String URL_MYSQL = "jdbc:mysql://192.168.1.73:3306";
-	//static final String USER_MYSQL = "remote";
-	//static final String PASS_MYSQL = "PASSWORD";
+	static final String PASS_MYSQL = "P@ssword";
 
 	public static void main(String[] args) {
 
 		connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
 		showDB();
 		
+		getValues("ud1204", "Bandos");
+		
 	}
 	
 	private static void createBD (String name) {
 		try {
 			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
+			String queryDrop  = "DROP DATABASE IF EXISTS" + name + ";";
+			Statement stDrop = connection.createStatement();
+			stDrop.executeUpdate(queryDrop);
 			String query = "CREATE DATABASE " + name + ";";
 			Statement st = connection.createStatement();
 			st.executeUpdate(query);
@@ -41,6 +43,7 @@ public class MainApp {
 	
 	private static void createTable(String database, String table, String columns) {
 		try {
+
 			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
 			String queryUseDb = "USE "+database+";";
 			Statement statementDb = connection.createStatement();
@@ -99,8 +102,9 @@ public class MainApp {
 						System.out.println(rsmd.getColumnName(i)+": "+resultSet.getDouble(i));
 						break;
 					}
+					
 				}
-				System.out.println(resultSet);
+				System.out.println();
 			}
 			
 			closeConnection();
