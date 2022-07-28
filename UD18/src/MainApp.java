@@ -12,23 +12,26 @@ import com.mysql.cj.MysqlConnection;
 public class MainApp {
 	
 	static Connection connection;
-	static final String URL_MYSQL = "jdbc:mysql://192.168.1.42:3306";
-	static final String USER_MYSQL = "remote";
-	static final String PASS_MYSQL = "P@ssword";
+	static final String URL_MYSQL = "jdbc:mysql://IP:PUERTO";
+	static final String USER_MYSQL = "USER";
+	static final String PASS_MYSQL = "PASSWORD";
 
 	public static void main(String[] args) {
 
 		connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
 		showDB();
 		
-		getValues("ud1204", "Bandos");
+		String database = "ud1801";
+		createDB(database);
+		createTable(database, "fabricantes", "codigo int not null, nombre varchar(255) not null, primary key(codigo)" );
+		createTable(database, "articulos", "codigo int not null, nombre varchar(255) not null, primary key(codigo)" );		
 		
 	}
 	
-	private static void createBD (String name) {
+	private static void createDB (String name) {
 		try {
 			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
-			String queryDrop  = "DROP DATABASE IF EXISTS" + name + ";";
+			String queryDrop  = "DROP DATABASE IF EXISTS " + name + ";";
 			Statement stDrop = connection.createStatement();
 			stDrop.executeUpdate(queryDrop);
 			String query = "CREATE DATABASE " + name + ";";
@@ -43,7 +46,7 @@ public class MainApp {
 	
 	private static void createTable(String database, String table, String columns) {
 		try {
-			connection(USER_MYSQL,PASS_MYSQL,database);
+			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
 			String queryUseDb = "USE "+database+";";
 			Statement statementDb = connection.createStatement();
 			statementDb.executeUpdate(queryUseDb);
