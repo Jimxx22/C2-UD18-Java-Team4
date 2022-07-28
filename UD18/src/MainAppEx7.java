@@ -20,7 +20,7 @@ public class MainAppEx7 {
 		String camposAsignadosA="cientifico varchar(8),proyecto char(4),primary key (cientifico , proyecto),constraint fk_dniCientifico FOREIGN KEY (cientifico) REFERENCES Cientificos (dni) ON DELETE CASCADE ON UPDATE CASCADE,constraint fk_idProyecto FOREIGN KEY (proyecto) REFERENCES Proyectos (id) ON DELETE CASCADE ON UPDATE CASCADE";
 		String insertAsignadosA="Insert into Asignados_a values ('4269094R','PE01'),('3023634Y','PE01'),('8116451M','PE05'),('6639741E','PE05'),('9889070Y','PE08'),('9069295K','PE09'),('7453884S','PE09'),('7403831M','PE03'),('9837593E','PE03'),('1686069Q','PE03');";
 		
-		//Metodos.createBD(db);
+		Metodos.createBD(db);
 		
 		Metodos.createTable(db, proyecto, camposProyectos);
 		Metodos.createTable(db, cientificos, camposCientificos);
