@@ -21,7 +21,7 @@ public class MainApp {
 		connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
 		showDB();
 		
-		getValues("actividades", "fabricantes");
+		getValues("ud1204", "Bandos");
 		
 	}
 	
@@ -101,11 +101,10 @@ public class MainApp {
 						System.out.println(rsmd.getColumnName(i)+": "+resultSet.getDouble(i));
 						break;
 					}
+					
 				}
-				System.out.println(resultSet);
+				System.out.println();
 			}
-			
-			System.out.println(resultSet.getMetaData().getColumnName(1));
 			
 			closeConnection();
 		} catch (SQLException e) {
