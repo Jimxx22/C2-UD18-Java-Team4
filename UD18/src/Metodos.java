@@ -93,6 +93,9 @@ public class Metodos {
 					case "CHAR":
 						System.out.println(rsmd.getColumnName(i)+": "+resultSet.getString(i));
 						break;
+					case "DATETIME":
+						System.out.println(rsmd.getColumnName(i)+": "+resultSet.getDate(i));
+						break;
 					}
 					
 				}
