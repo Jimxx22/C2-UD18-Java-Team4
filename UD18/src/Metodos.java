@@ -9,26 +9,17 @@ import java.util.logging.Logger;
 
 import com.mysql.cj.MysqlConnection;
 
-public class MainApp {
+public class Metodos {
 	
 	static Connection connection;
-	static final String URL_MYSQL = "jdbc:mysql://192.168.1.42:3306";
+	static final String URL_MYSQL = "jdbc:mysql://192.168.1.38:3306";
 	static final String USER_MYSQL = "remote";
-	static final String PASS_MYSQL = "P@ssword";
-
-	public static void main(String[] args) {
-
-		connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
-		showDB();
-		
-		getValues("ud1204", "Bandos");
-		
-	}
+	static final String PASS_MYSQL = "Bootcam_1";
 	
 	private static void createBD (String name) {
 		try {
 			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
-			String queryDrop  = "DROP DATABASE IF EXISTS" + name + ";";
+			String queryDrop  = "DROP DATABASE IF EXISTS " + name + ";";
 			Statement stDrop = connection.createStatement();
 			stDrop.executeUpdate(queryDrop);
 			String query = "CREATE DATABASE " + name + ";";
