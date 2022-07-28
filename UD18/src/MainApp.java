@@ -9,12 +9,13 @@ import java.util.logging.Logger;
 public class MainApp {
 	
 	static Connection connection;
+	static final String URL_MYSQL = "jdbc:mysql://192.168.1.73:3306";
 	static final String USER_MYSQL = "remote";
-	static final String PASS_MYSQL = "P@ssword";
+	static final String PASS_MYSQL = "PASSWORD";
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		connection("jdbc:mysql://192.168.1.42:3306",USER_MYSQL,PASS_MYSQL);
+		connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
 		showDB();
 		
 	}
