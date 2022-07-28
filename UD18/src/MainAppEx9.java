@@ -24,16 +24,16 @@ public class MainAppEx9 {
 		String camposReserva="dni varchar(8) not null,numSerie char(4) not null,comienzo datetime,fin datetime,primary key (dni, numSerie),constraint fk_ReservaInvestigador FOREIGN KEY (dni) REFERENCES Investigadores(dni) ON DELETE CASCADE ON UPDATE CASCADE,constraint fk_ReservaEquipo FOREIGN KEY (numSerie) REFERENCES Equipos(numSerie) ON DELETE CASCADE ON UPDATE CASCADE";
 		String insertReserva="Insert into Reserva values ('1501770X','GP01','2021-11-20','2022-03-21'),('8561124Y','GP02','2021-12-10','2022-02-01'),('9028610E','GP03','2020-10-15','2021-04-22'),('0748311H','GP04','2020-04-10','2020-09-29'),('2922936E','GP05','2021-11-20','2022-03-21'),('0972860M','GP06','2022-01-20','2022-05-08'),('0748311H','GP07','2021-05-20','2021-12-21'),('7282724C','GP08','2021-12-20','2022-03-21'),('7906130L','GP09','2021-01-20','2021-03-21'),('7283808V','GP10','2021-10-20','2022-01-21');";
 
-		//Metodos.createBD(db);
+		Metodos.createBD(db);
 		
-		//Metodos.createTable(db, facultad, camposFacultad);
-		//Metodos.createTable(db, equipos, camposEquipos);
-		//Metodos.createTable(db, investigadores, camposInvestigadores);
+		Metodos.createTable(db, facultad, camposFacultad);
+		Metodos.createTable(db, equipos, camposEquipos);
+		Metodos.createTable(db, investigadores, camposInvestigadores);
 		Metodos.createTable(db, reserva, camposReserva);
 		
-		//Metodos.insertData(db, insertFacultad);
-		//Metodos.insertData(db, insertEquipos);
-		//Metodos.insertData(db, insertInvestigadores);
+		Metodos.insertData(db, insertFacultad);
+		Metodos.insertData(db, insertEquipos);
+		Metodos.insertData(db, insertInvestigadores);
 		Metodos.insertData(db, insertReserva);
 
 	}
