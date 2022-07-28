@@ -71,6 +71,27 @@ public class MainApp {
 			st.executeQuery(query);
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
+		} 
+	}
+		
+	public static void insertData(String db, String insert) {
+		
+		try {
+			String usedb="USE "+db+";";
+			Statement stdb=connection.createStatement();
+			stdb.executeUpdate(usedb);
+			
+			Statement st = connection.createStatement();
+			st.executeUpdate(insert);
+			
+			System.out.println("Datos almacenados correctamente");
+			
+		} catch (SQLException e) {
+			System.out.println("Error al almacendar los datos");
+			System.out.println(e);
 		}
+		
+		
+		
 	}
 }
