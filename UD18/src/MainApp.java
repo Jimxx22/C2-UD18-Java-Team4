@@ -27,6 +27,10 @@ public class MainApp {
 	
 	private static void createBD (String name) {
 		try {
+			String queryDrop  = "DROP DATABASE IF EXISTS" + name + ";";
+			Statement stDrop = connection.createStatement();
+			stDrop.executeUpdate(queryDrop);
+			
 			String query = "CREATE DATABASE " + name + ";";
 			Statement st = connection.createStatement();
 			st.executeUpdate(query);
