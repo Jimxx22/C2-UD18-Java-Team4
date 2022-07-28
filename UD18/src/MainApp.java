@@ -63,4 +63,25 @@ public class MainApp {
 			System.out.println("Error al desconectar");
 		}
 	}
+	
+	public static void insertData(String db, String insert) {
+		
+		try {
+			String usedb="USE "+db+";";
+			Statement stdb=connection.createStatement();
+			stdb.executeUpdate(usedb);
+			
+			Statement st = connection.createStatement();
+			st.executeUpdate(insert);
+			
+			System.out.println("Datos almacenados correctamente");
+			
+		} catch (SQLException e) {
+			System.out.println("Error al almacendar los datos");
+			System.out.println(e);
+		}
+		
+		
+		
+	}
 }
