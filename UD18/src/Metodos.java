@@ -2,6 +2,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -69,7 +70,7 @@ public class Metodos {
 			
 			String querySl = "SELECT * FROM " + nameTable + ";";
 			Statement st = connection.createStatement();
-			java.sql.ResultSet resultSet;
+			ResultSet resultSet;
 			resultSet = st.executeQuery(querySl);
 			ResultSetMetaData rsmd = resultSet.getMetaData();
 			int columnNum = rsmd.getColumnCount();
@@ -113,7 +114,12 @@ public class Metodos {
 	public void deleteRecord(String table, String id) {
 		try {
 			connection(Credentials.URL_MYSQL,Credentials.USER_MYSQL,Credentials.PASS_MYSQL);
-			String query = "DELETE FROM " + table + " WHERE ID = " + id + ";";
+			ResultSet resultSet;
+			String querySl = "SELECT * FROM " + table + ";";
+			Statement stSelect = connection.createStatement();
+			resultSet = stSelect.executeQuery(querySl);
+			
+			String query = "DELETE FROM " + table + " WHERE "+resultSet.getMetaData().getColumnName(1)+" = " + id + ";";
 			Statement st = connection.createStatement();
 			st.executeQuery(query);
 			closeConnection();
