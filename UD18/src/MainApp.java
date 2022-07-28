@@ -80,8 +80,7 @@ public class MainApp {
 			System.out.println("Error al almacendar los datos");
 			System.out.println(e);
 		}
-		
-		
-		
 	}
+	
+	
 }
