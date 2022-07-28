@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class Ejercicio1 extends Metodos{
+public class MainAppEx1 extends Metodos{
 	
 	public static void main(String[] args) {
 		connection(Credentials.URL_MYSQL, Credentials.USER_MYSQL, Credentials.PASS_MYSQL);
