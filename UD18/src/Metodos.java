@@ -7,34 +7,21 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.mysql.cj.MysqlConnection;
 
-public class MainApp {
+public class Metodos {
 	
 	static Connection connection;
-
-	public static void main(String[] args) {
-
-		connection(Credentials.URL_MYSQL,Credentials.USER_MYSQL,Credentials.PASS_MYSQL);
-		showDB();
-		
-		String database = "ud1801";
-		String table = "Fabricantes";
-		String columns = "";
-		createDB (database);
-		createTable(database, table, "");
-		createDB(database);
-		createTable(database, "fabricantes", "codigo int not null, nombre varchar(255) not null, primary key(codigo)" );
-		createTable(database, "articulos", "codigo int not null, nombre varchar(255) not null, primary key(codigo)" );		
-		
-	}
+	static final String URL_MYSQL = "jdbc:mysql://192.168.1.38:3306";
+	static final String USER_MYSQL = "remote";
+	static final String PASS_MYSQL = "Bootcam_1";
 	
-	private static void createDB (String name) {
+	private static void createBD (String name) {
 		try {
-			connection(Credentials.URL_MYSQL,Credentials.USER_MYSQL,Credentials.PASS_MYSQL);
+			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
 			String queryDrop  = "DROP DATABASE IF EXISTS " + name + ";";
 			Statement stDrop = connection.createStatement();
 			stDrop.executeUpdate(queryDrop);
-			
 			String query = "CREATE DATABASE " + name + ";";
 			Statement st = connection.createStatement();
 			st.executeUpdate(query);
@@ -47,7 +34,8 @@ public class MainApp {
 	
 	private static void createTable(String database, String table, String columns) {
 		try {
-			connection(Credentials.URL_MYSQL,Credentials.USER_MYSQL,Credentials.PASS_MYSQL);
+
+			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
 			String queryUseDb = "USE "+database+";";
 			Statement statementDb = connection.createStatement();
 			statementDb.executeUpdate(queryUseDb);
@@ -77,7 +65,7 @@ public class MainApp {
 	
 	public static void getValues (String db, String nameTable) {
 		try {
-			connection(Credentials.URL_MYSQL,Credentials.USER_MYSQL,Credentials.PASS_MYSQL);
+			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
 			String queryDB = "USE " + db + ";";
 			Statement stdb = connection.createStatement();
 			stdb.executeUpdate(queryDB);
@@ -127,7 +115,7 @@ public class MainApp {
 	
 	public void deleteRecord(String table, String id) {
 		try {
-			connection(Credentials.URL_MYSQL,Credentials.USER_MYSQL,Credentials.PASS_MYSQL);
+			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
 			String query = "DELETE FROM " + table + " WHERE ID = " + id + ";";
 			Statement st = connection.createStatement();
 			st.executeQuery(query);
@@ -140,7 +128,7 @@ public class MainApp {
 	public static void insertData(String db, String insert) {
 		
 		try {
-			connection(Credentials.URL_MYSQL,Credentials.USER_MYSQL,Credentials.PASS_MYSQL);
+			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
 			String usedb="USE "+db+";";
 			Statement stdb=connection.createStatement();
 			stdb.executeUpdate(usedb);
@@ -159,7 +147,7 @@ public class MainApp {
 	
 	public static void showDB () {
 		try {
-			connection(Credentials.URL_MYSQL,Credentials.USER_MYSQL,Credentials.PASS_MYSQL);
+			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
 			String query = "SHOW DATABASES; " ;
 			Statement st = connection.createStatement();
 			java.sql.ResultSet resultSet;
