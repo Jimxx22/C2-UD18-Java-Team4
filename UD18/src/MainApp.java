@@ -2,6 +2,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.DriverManager;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -80,6 +81,28 @@ public class MainApp {
 			Statement st = connection.createStatement();
 			java.sql.ResultSet resultSet;
 			resultSet = st.executeQuery(querySl);
+			ResultSetMetaData rsmd = resultSet.getMetaData();
+			int columnNum = rsmd.getColumnCount();
+			
+			while(resultSet.next()) {
+				for(int i = 1; i <= columnNum; i++) {
+					switch(rsmd.getColumnTypeName(i)) {
+					case "VARCHAR":
+						System.out.println(rsmd.getColumnName(i)+": "+resultSet.getString(i));
+						break;
+					case "INT":
+						System.out.println(rsmd.getColumnName(i)+": "+resultSet.getInt(i));
+						break;
+					case "DATE":
+						System.out.println(rsmd.getColumnName(i)+": "+resultSet.getDate(i));
+						break;
+					case "DOUBLE":
+						System.out.println(rsmd.getColumnName(i)+": "+resultSet.getDouble(i));
+						break;
+					}
+				}
+				System.out.println(resultSet);
+			}
 			
 			closeConnection();
 		} catch (SQLException e) {
@@ -137,12 +160,10 @@ public class MainApp {
 			while (resultSet.next()) {
 				System.out.println(resultSet.getString("Database"));
 			}
-			
 			closeConnection();
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
 		} 
 	}
-	
 	
 }
