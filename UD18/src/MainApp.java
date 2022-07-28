@@ -6,22 +6,27 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.mysql.cj.MysqlConnection;
+
 public class MainApp {
 	
 	static Connection connection;
-	static final String URL_MYSQL = "jdbc:mysql://192.168.1.73:3306";
+	static final String URL_MYSQL = "jdbc:mysql://192.168.1.42:3306";
 	static final String USER_MYSQL = "remote";
-	static final String PASS_MYSQL = "PASSWORD";
+	static final String PASS_MYSQL = "P@ssword";
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
 		showDB();
 		
+		createBD("actividades");
+		
 	}
 	
 	private static void createBD (String name) {
 		try {
+			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
 			String query = "CREATE DATABASE " + name + ";";
 			Statement st = connection.createStatement();
 			st.executeUpdate(query);
@@ -34,6 +39,7 @@ public class MainApp {
 	
 	private static void createTable(String database, String table, String columns) {
 		try {
+			connection(USER_MYSQL,PASS_MYSQL,database);
 			String queryUseDb = "USE "+database+";";
 			Statement statementDb = connection.createStatement();
 			statementDb.executeUpdate(queryUseDb);
