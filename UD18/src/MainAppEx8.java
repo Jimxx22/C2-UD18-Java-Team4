@@ -36,6 +36,12 @@ public class MainAppEx8 {
 		Metodos.insertData(db, insertMaquinasRegistradoras);
 		Metodos.insertData(db, insertProductos);
 		Metodos.insertData(db, insertVentas);
+		
+		Metodos.getValues(db, cajeros);	
+		Metodos.getValues(db, maquinasRegistradoras);	
+		Metodos.getValues(db, productos);	
+		Metodos.getValues(db, ventas);	
+
 
 	}
 
