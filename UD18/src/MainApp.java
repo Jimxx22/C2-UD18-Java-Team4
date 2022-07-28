@@ -11,7 +11,8 @@ public class MainApp {
 	static Connection connection;
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+
+		connection("jdbc:mysql://192.168.1.38:3306", "remote", "Bootcam_1");
 
 	}
 	
