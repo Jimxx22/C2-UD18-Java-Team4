@@ -10,16 +10,19 @@ public class MainApp {
 	
 	static Connection connection;
 	
-	static final String USER_MYSQL = "jdbc:mysql://192.168.1.38:3306";
-	static final String PASS_MYSQL = "remote";
-	static final String URL = "Bootcam_1";
+	static final String USER_MYSQL = "remote";
+	static final String PASS_MYSQL = "Bootcam_1"; 
+	static final String URL_MYSQL = "jdbc:mysql://192.168.1.38:3306";
 
 	//static final String URL_MYSQL = "jdbc:mysql://192.168.1.73:3306";
 	//static final String USER_MYSQL = "remote";
 	//static final String PASS_MYSQL = "PASSWORD";
 
 	public static void main(String[] args) {
-		connection(URL,USER_MYSQL,PASS_MYSQL);	
+
+		connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
+		showDB();
+		
 	}
 	
 	private static void createBD (String name) {
@@ -123,7 +126,14 @@ public class MainApp {
 		try {
 			String query = "SHOW DATABASES; " ;
 			Statement st = connection.createStatement();
-			st.executeQuery(query);
+			java.sql.ResultSet resultSet;
+			resultSet = st.executeQuery(query);
+			
+			System.out.println("Databases:");
+			while (resultSet.next()) {
+				System.out.println(resultSet.getString("Database"));
+			}
+			
 			closeConnection();
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
