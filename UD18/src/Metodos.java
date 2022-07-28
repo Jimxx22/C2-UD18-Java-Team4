@@ -111,9 +111,13 @@ public class Metodos {
 		}
 	}
 	
-	public void deleteRecord(String table, String id) {
+	public static void deleteRecord(String db, String table, String id) {
 		try {
 			connection(Credentials.URL_MYSQL,Credentials.USER_MYSQL,Credentials.PASS_MYSQL);
+			String queryDB = "USE " + db + ";";
+			Statement stdb = connection.createStatement();
+			stdb.executeUpdate(queryDB);
+			
 			ResultSet resultSet;
 			String querySl = "SELECT * FROM " + table + ";";
 			Statement stSelect = connection.createStatement();
@@ -121,8 +125,9 @@ public class Metodos {
 			
 			String query = "DELETE FROM " + table + " WHERE "+resultSet.getMetaData().getColumnName(1)+" = " + id + ";";
 			Statement st = connection.createStatement();
-			st.executeQuery(query);
+			st.executeUpdate(query);
 			closeConnection();
+			System.out.println("Linia borrada");
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
 		} 

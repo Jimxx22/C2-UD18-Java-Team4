@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 public class Ejercicio1 extends Metodos{
 	
 	public static void main(String[] args) {
-		connection(URL_MYSQL, USER_MYSQL, PASS_MYSQL);
+		connection(Credentials.URL_MYSQL, Credentials.USER_MYSQL, Credentials.PASS_MYSQL);
 		String database = "ud1801";
 		createBD(database);
 		createTable(database, "fabricantes", "codigo int not null, nombre varchar(255), primary key(codigo)");
