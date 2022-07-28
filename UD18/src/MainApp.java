@@ -15,6 +15,18 @@ public class MainApp {
 
 	}
 	
+	private static void createBD (String name) {
+		try {
+			String query = "CREATE DATABASE " + name + ";";
+			Statement st = connection.createStatement();
+			st.executeUpdate(query);
+			closeConnection();
+			System.out.println("La base de datos " + name + " se ha creado correctamente");
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
 	private static void createTable(String database, String table, String columns) {
 		try {
 			String queryUseDb = "USE "+database+";";
