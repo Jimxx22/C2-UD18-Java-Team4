@@ -27,10 +27,7 @@ public class MainApp {
 	
 	private static void createBD (String name) {
 		try {
-			String queryDrop  = "DROP DATABASE IF EXISTS" + name + ";";
-			Statement stDrop = connection.createStatement();
-			stDrop.executeUpdate(queryDrop);
-			
+			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
 			String query = "CREATE DATABASE " + name + ";";
 			Statement st = connection.createStatement();
 			st.executeUpdate(query);
@@ -43,6 +40,7 @@ public class MainApp {
 	
 	private static void createTable(String database, String table, String columns) {
 		try {
+			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
 			String queryUseDb = "USE "+database+";";
 			Statement statementDb = connection.createStatement();
 			statementDb.executeUpdate(queryUseDb);
@@ -59,7 +57,7 @@ public class MainApp {
 
 	public static void connection(String url, String user, String pass) {
 		
-		try {
+		try {		
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager.getConnection(url, user, pass);
 			System.out.println("Server Connected");
@@ -72,6 +70,7 @@ public class MainApp {
 	
 	public static void getValues (String db, String nameTable) {
 		try {
+			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
 			String queryDB = "USE " + db + ";";
 			Statement stdb = connection.createStatement();
 			stdb.executeUpdate(queryDB);
@@ -98,6 +97,7 @@ public class MainApp {
 	
 	public void deleteRecord(String table, String id) {
 		try {
+			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
 			String query = "DELETE FROM " + table + " WHERE ID = " + id + ";";
 			Statement st = connection.createStatement();
 			st.executeQuery(query);
@@ -110,6 +110,7 @@ public class MainApp {
 	public static void insertData(String db, String insert) {
 		
 		try {
+			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
 			String usedb="USE "+db+";";
 			Statement stdb=connection.createStatement();
 			stdb.executeUpdate(usedb);
@@ -128,6 +129,7 @@ public class MainApp {
 	
 	public static void showDB () {
 		try {
+			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
 			String query = "SHOW DATABASES; " ;
 			Statement st = connection.createStatement();
 			java.sql.ResultSet resultSet;
