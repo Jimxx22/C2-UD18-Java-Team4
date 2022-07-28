@@ -16,17 +16,20 @@ public class MainApp {
 	static final String PASS_MYSQL = "P@ssword";
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+
 		connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
 		showDB();
 		
-		createBD("actividades");
+		getValues("actividades", "fabricantes");
 		
 	}
 	
 	private static void createBD (String name) {
 		try {
 			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
+			String queryDrop  = "DROP DATABASE IF EXISTS" + name + ";";
+			Statement stDrop = connection.createStatement();
+			stDrop.executeUpdate(queryDrop);
 			String query = "CREATE DATABASE " + name + ";";
 			Statement st = connection.createStatement();
 			st.executeUpdate(query);
@@ -69,6 +72,7 @@ public class MainApp {
 	
 	public static void getValues (String db, String nameTable) {
 		try {
+			connection(URL_MYSQL,USER_MYSQL,PASS_MYSQL);
 			String queryDB = "USE " + db + ";";
 			Statement stdb = connection.createStatement();
 			stdb.executeUpdate(queryDB);
@@ -77,6 +81,8 @@ public class MainApp {
 			Statement st = connection.createStatement();
 			java.sql.ResultSet resultSet;
 			resultSet = st.executeQuery(querySl);
+			
+			System.out.println(resultSet.getMetaData().getColumnName(1));
 			
 			closeConnection();
 		} catch (SQLException e) {
